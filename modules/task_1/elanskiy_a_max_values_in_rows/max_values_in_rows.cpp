@@ -1,8 +1,7 @@
 // Copyright 2021 Elanskiy Akexandr
 #include "../../../modules/task_1/elanskiy_a_max_values_in_rows/max_values_in_rows.h"
 
-std::vector<int> mat_gen(int rows, int cols)
-{
+std::vector<int> mat_gen(int rows, int cols) {
     std::mt19937 gen(time(0));
     int size = rows * cols;
     std::vector<int> matrix(size);
@@ -12,8 +11,7 @@ std::vector<int> mat_gen(int rows, int cols)
     return matrix;
 }
 
-std::vector<int> max_in_rows_seq(std::vector<int> m, int cols)
-{
+std::vector<int> max_in_rows_seq(std::vector<int> m, int cols) {
     std::vector<int> res;
     int max;
     int size = m.size();
@@ -29,8 +27,7 @@ std::vector<int> max_in_rows_seq(std::vector<int> m, int cols)
     return res;
 }
 
-std::vector<int> max_in_rows_par(std::vector<int> m, int rows, int cols)
-{
+std::vector<int> max_in_rows_par(std::vector<int> m, int rows, int cols) {
     int procNum;
     int procRank;
     MPI_Comm_size(MPI_COMM_WORLD, &procNum);
@@ -50,7 +47,8 @@ std::vector<int> max_in_rows_par(std::vector<int> m, int rows, int cols)
     }
     std::vector<int> part_res;
     std::vector<int> part_of_m(part_size_of_m[procRank]);
-    MPI_Scatterv(m.data(), part_size_of_m.data(), displs.data(), MPI_INT, part_of_m.data(), part_size_of_m[procRank], MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatterv(m.data(), part_size_of_m.data(), displs.data(), MPI_INT, 
+        part_of_m.data(), part_size_of_m[procRank], MPI_INT, 0, MPI_COMM_WORLD);
 
     for (int i = 0; i < part_size_of_m[procRank]; i += cols) {
         max = part_of_m[i];
@@ -71,6 +69,7 @@ std::vector<int> max_in_rows_par(std::vector<int> m, int rows, int cols)
     if (rows % procNum > 0) {
         part_size_of_m[procNum - 1] += rows % procNum;
     }
-    MPI_Gatherv(part_res.data(), part_size_of_m[procRank], MPI_INT, res.data(), part_size_of_m.data(), displs.data(), MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gatherv(part_res.data(), part_size_of_m[procRank], MPI_INT, 
+        res.data(), part_size_of_m.data(), displs.data(), MPI_INT, 0, MPI_COMM_WORLD);
     return res;
 }

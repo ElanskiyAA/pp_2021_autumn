@@ -1,8 +1,7 @@
 ﻿// Copyright 2021 Elanskiy Akexandr
 #include "./max_values_in_rows.h"
 
-TEST(MPI_TEST, size_1x10)
-{
+TEST(MPI_TEST, size_1x10) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     int rows = 1;
@@ -18,8 +17,7 @@ TEST(MPI_TEST, size_1x10)
     }
 }
 
-TEST(MPI_TEST, size_13x37)
-{
+TEST(MPI_TEST, size_13x37) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     int rows = 13;
@@ -35,8 +33,7 @@ TEST(MPI_TEST, size_13x37)
     }
 }
 
-TEST(MPI_TEST, size_20x20)
-{
+TEST(MPI_TEST, size_20x20) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     int rows = 20;
@@ -52,8 +49,7 @@ TEST(MPI_TEST, size_20x20)
     }
 }
 
-TEST(MPI_TEST, size_20x77)
-{
+TEST(MPI_TEST, size_20x77) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     int rows = 20;
@@ -69,8 +65,7 @@ TEST(MPI_TEST, size_20x77)
     }
 }
 
-TEST(MPI_TEST, size_37x5)
-{
+TEST(MPI_TEST, size_37x5) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     int rows = 37;
@@ -86,8 +81,7 @@ TEST(MPI_TEST, size_37x5)
     }
 }
 
-TEST(MPI_TEST, size_26x11)
-{
+TEST(MPI_TEST, size_26x11) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     int rows = 26;
@@ -103,8 +97,7 @@ TEST(MPI_TEST, size_26x11)
     }
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     std::vector<int> result1;
     std::vector<int> result2;
